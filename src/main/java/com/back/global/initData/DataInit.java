@@ -50,8 +50,8 @@ public class DataInit {
     @Transactional
     public void makeMembers() {
         if(memberRepository.count() > 0) return;
-        createMember("user1@test.com", "1234", "회원1");
-        createMember("user2@test.com", "1234", "회원2");
+        createMember("user1@test.com", "12345678", "회원1");
+        createMember("user2@test.com", "12345678", "회원2");
     }
 
     @Transactional
