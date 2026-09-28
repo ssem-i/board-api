@@ -1,5 +1,6 @@
 package com.back.global.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,12 +24,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                //.csrf(csrf -> csrf.disable())
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers(
                                 "/api/member/signup",
                                 "/api/auth/login"
-                        ))
+                        ).ignoringRequestMatchers(PathRequest.toH2Console())
+                )
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/member/signup",
@@ -36,13 +40,16 @@ public class SecurityConfig {
                         ).permitAll()
                         .requestMatchers(
                                 HttpMethod.GET,
+                                "/api/csrf",
                                 "/api/posts",
                                 "/api/posts/**",
                                 "/api/comments",
                                 "/api/comments/**"
                         ).permitAll()
                         .anyRequest().authenticated())
-
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.sameOrigin())
+                )
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, e) -> {
                             response.setStatus(401);

@@ -13,14 +13,24 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleIllegalArgument(IllegalArgumentException e) {
-        return Map.of("message", e.getMessage());
+    public Map<String, String> handleIllegalArgument(
+            IllegalArgumentException e
+    ) {
+        return Map.of(
+                "code", "BAD_REQUEST",
+                "message", e.getMessage()
+        );
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleValidation(MethodArgumentNotValidException e) {
-        return Map.of("message", "입력값이 올바르지 않습니다.");
+    public Map<String, String> handleValidation(
+            MethodArgumentNotValidException e
+    ) {
+        return Map.of(
+                "code", "BAD_REQUEST",
+                "message", "입력값이 올바르지 않습니다."
+        );
     }
 
     @ExceptionHandler(ResponseStatusException.class)
