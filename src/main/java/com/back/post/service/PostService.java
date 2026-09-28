@@ -1,5 +1,6 @@
 package com.back.post.service;
 
+import com.back.comment.repository.CommentRepository;
 import com.back.member.entity.Member;
 import com.back.member.repository.MemberRepository;
 import com.back.post.dto.PostListResponse;
@@ -21,6 +22,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public PostResponse create(PostRequest request, String email) {
@@ -62,6 +64,8 @@ public class PostService {
     public void delete(Long id, String email) {
         Post post = findPost(id);
         validateAuthor(post, email);
+        commentRepository.deleteByPost_Id(id);
+
         postRepository.delete(post);
     }
 
