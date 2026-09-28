@@ -1,9 +1,9 @@
-package com.back.service;
+package com.back.member.service;
 
-import com.back.dto.SignupRequest;
-import com.back.dto.SignupResponse;
-import com.back.entity.Member;
-import com.back.repository.MemberRepository;
+import com.back.member.dto.SignupRequest;
+import com.back.member.dto.SignupResponse;
+import com.back.member.entity.Member;
+import com.back.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

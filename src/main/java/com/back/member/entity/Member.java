@@ -1,4 +1,4 @@
-package com.back.entity;
+package com.back.member.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

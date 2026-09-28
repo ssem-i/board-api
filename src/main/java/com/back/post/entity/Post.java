@@ -1,5 +1,7 @@
-package com.back.entity;
+package com.back.post.entity;
 
+import com.back.comment.entity.Comment;
+import com.back.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.back.dto;
+package com.back.member.dto;
 
 public record SignupResponse(
         Long id,
